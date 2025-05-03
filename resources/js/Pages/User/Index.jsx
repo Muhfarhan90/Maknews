@@ -2,7 +2,7 @@ import React from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, Link, router } from "@inertiajs/react";
 import SearchBar from "@/Components/SearchBar";
-const Index = (props) => {
+const Index = ({ ...props }) => {
     console.log(props);
     const handleDelete = (id) => {
         if (!window.confirm("Are you sure you want to delete the user?")) {
@@ -45,6 +45,7 @@ const Index = (props) => {
                                         <th>No</th>
                                         <th>Name</th>
                                         <th>Email</th>
+                                        <th>Role</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -55,6 +56,7 @@ const Index = (props) => {
                                                 <th>{index + 1} </th>
                                                 <td>{user.name}</td>
                                                 <td>{user.email}</td>
+                                                <td>{user.role ? user.role.name : "-"}</td>
                                                 <td className="flex items-center gap-2">
                                                     <Link
                                                         href={route(

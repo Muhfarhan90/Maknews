@@ -1,11 +1,13 @@
 import React from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, Link, useForm } from "@inertiajs/react";
-const Edit = ({ user }) => {
+import Select from "@/Components/Select";
+const Edit = ({ user, roles }) => {
     console.log(user);
     const { data, setData, post, processing, errors, reset } = useForm({
         name: user.name || "",
         email: user.email || "",
+        role_id: user.role_id || "",
         password: "",
         password_confirmation: "",
         _method: "put",
@@ -16,15 +18,6 @@ const Edit = ({ user }) => {
         post(route("users.update", user.id));
     };
 
-    const handleReset = () => {
-        reset({
-            name: user.name || "",
-            email: user.email || "",
-            password: "",
-            password_confirmation: "",
-            _method: "put",
-        });
-    };
     return (
         <div>
             <AuthenticatedLayout
@@ -91,6 +84,15 @@ const Edit = ({ user }) => {
                                     settings
                                 </p>
                             </fieldset>
+                            {roles.length > 0 && (
+                                <Select
+                                    options={roles}
+                                    value={data.role_id}
+                                    onChange={(e) =>
+                                        setData("role_id", e.target.value)
+                                    }
+                                />
+                            )}
                             <fieldset className="fieldset">
                                 <legend className="fieldset-legend">
                                     Password

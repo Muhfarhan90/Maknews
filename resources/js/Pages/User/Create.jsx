@@ -1,10 +1,12 @@
 import React from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, Link, useForm } from "@inertiajs/react";
-const Create = () => {
+import Select from "@/Components/Select";
+const Create = ({ roles }) => {
     const { data, setData, post, processing, errors, reset } = useForm({
         name: "",
         email: "",
+        role_id: "",
         password: "",
         password_confirmation: "",
     });
@@ -79,6 +81,15 @@ const Create = () => {
                                     settings
                                 </p>
                             </fieldset>
+                            {roles.length > 0 && (
+                                <Select
+                                    options={roles}
+                                    value={data.role_id}
+                                    onChange={(e) =>
+                                        setData("role_id", e.target.value)
+                                    }
+                                />
+                            )}
                             <fieldset className="fieldset">
                                 <legend className="fieldset-legend">
                                     Password

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -14,13 +15,14 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $query = User::query();
-
+        $roles = Role::all();
         if ($request->search) {
             $query->where('name', 'like', "%{$request->search}%");
         }
-        $users = $query->get();
+        $users = $query->with('role')->get();
         return Inertia::render('User/Index', [
             'users' => $users,
+            'roles' => $roles,
         ]);
     }
     /**
@@ -28,7 +30,10 @@ class UserController extends Controller
      */
     public function create()
     {
-        return Inertia::render('User/Create');
+        $roles = Role::all();
+        return Inertia::render('User/Create', [
+            'roles' => $roles,
+        ]);
     }
 
     /**
@@ -40,11 +45,13 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
+            'role_id' => 'required',
         ]);
         User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
+            'role_id' => $request->role_id,
         ]);
         return redirect()->route('users.index')->with('success', 'User created successfully.');
     }
@@ -63,7 +70,11 @@ class UserController extends Controller
     public function edit(string $id)
     {
         $user = User::findOrFail($id);
-        return Inertia::render('User/Edit', ['user' => $user]);
+        $roles = Role::all();
+        return Inertia::render('User/Edit', [
+            'user' => $user,
+            'roles' => $roles,
+        ]);
     }
 
     /**
@@ -76,10 +87,12 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
             'password' => 'nullable|string|min:8|confirmed',
+            'role_id' => 'required',
         ]);
         $data = [
             'name' => $request->name,
             'email' => $request->email,
+            'role_id' => $request->role_id,
         ];
         if ($request->filled('password')) {
             $data['password'] = bcrypt($request->password);
