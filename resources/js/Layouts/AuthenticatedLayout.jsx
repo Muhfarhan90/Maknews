@@ -42,6 +42,12 @@ export default function AuthenticatedLayout({ header, children }) {
                                 >
                                     Roles
                                 </NavLink>
+                                <NavLink
+                                    href={route('category_articles.index')}
+                                    active={route().current('category_articles.index')}
+                                >
+                                    Category Articles
+                                </NavLink>
                             </div>
                         </div>
 
