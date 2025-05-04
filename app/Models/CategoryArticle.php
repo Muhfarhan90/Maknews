@@ -13,4 +13,8 @@ class CategoryArticle extends Model
         'name',
         'photo_category'
     ];
+
+    public function articles() {
+        $this->hasMany(Article::class);
+    }
 }

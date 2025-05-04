@@ -88,6 +88,7 @@ const Create = ({ roles }) => {
                                     onChange={(e) =>
                                         setData("role_id", e.target.value)
                                     }
+                                    label="Pilih Role"
                                 />
                             )}
                             <fieldset className="fieldset">

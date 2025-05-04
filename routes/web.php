@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CategoryArticleController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
@@ -13,6 +14,7 @@ Route::redirect('/', '/dashboard');
 Route::resource('users', UserController::class);
 Route::resource('roles', RoleController::class);
 Route::resource('category_articles', CategoryArticleController::class);
+Route::resource('articles', ArticleController::class);
 
 Route::get('/welcome', function () {
     return Inertia::render('Welcome', [
