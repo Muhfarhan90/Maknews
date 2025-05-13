@@ -1,5 +1,5 @@
 import React from "react";
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+import AuthenticatedLayout from "@/Pages/Layouts/AuthenticatedLayout";
 import { Head, Link, router } from "@inertiajs/react";
 import SearchBar from "@/Components/SearchBar";
 const Index = (props) => {
@@ -29,7 +29,7 @@ const Index = (props) => {
                         )}
                         <div className="mb-4 flex items-center justify-between">
                             {/* Search Bar */}
-                            <SearchBar routeName={"roles.index"}/>
+                            <SearchBar routeName={"roles.index"} />
                             <Link
                                 href={route("roles.create")}
                                 className="btn btn-primary"
@@ -64,7 +64,11 @@ const Index = (props) => {
                                                         Edit
                                                     </Link>
                                                     <button
-                                                        onClick={() => handleDelete(role.id)}
+                                                        onClick={() =>
+                                                            handleDelete(
+                                                                role.id
+                                                            )
+                                                        }
                                                         className="btn btn-sm btn-error"
                                                     >
                                                         Delete

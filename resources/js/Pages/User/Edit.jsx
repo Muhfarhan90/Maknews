@@ -1,5 +1,5 @@
 import React from "react";
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+import AuthenticatedLayout from "@/Pages/Layouts/AuthenticatedLayout";
 import { Head, Link, useForm } from "@inertiajs/react";
 import Select from "@/Components/Select";
 const Edit = ({ user, roles }) => {

@@ -1,5 +1,5 @@
 import React from "react";
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+import AuthenticatedLayout from "@/Pages/Layouts/AuthenticatedLayout";
 import { Head, Link, router } from "@inertiajs/react";
 import SearchBar from "@/Components/SearchBar";
 const Index = ({ ...props }) => {
@@ -59,12 +59,11 @@ const Index = ({ ...props }) => {
                                                         {category.photo_category ? (
                                                             <div className="avatar">
                                                                 <div className="mask mask-squircle h-12 w-12">
-                                                                <img
-                                                                    src={`/storage/${category.photo_category}`}
-                                                                    alt=""
-                                                                />
+                                                                    <img
+                                                                        src={`/storage/${category.photo_category}`}
+                                                                        alt=""
+                                                                    />
                                                                 </div>
-
                                                             </div>
                                                         ) : (
                                                             "No Image"

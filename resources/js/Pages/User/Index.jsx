@@ -1,5 +1,5 @@
 import React from "react";
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+import AuthenticatedLayout from "@/Pages/Layouts/AuthenticatedLayout";
 import { Head, Link, router } from "@inertiajs/react";
 import SearchBar from "@/Components/SearchBar";
 const Index = ({ ...props }) => {
@@ -56,7 +56,11 @@ const Index = ({ ...props }) => {
                                                 <th>{index + 1} </th>
                                                 <td>{user.name}</td>
                                                 <td>{user.email}</td>
-                                                <td>{user.role ? user.role.name : "-"}</td>
+                                                <td>
+                                                    {user.role
+                                                        ? user.role.name
+                                                        : "-"}
+                                                </td>
                                                 <td className="flex items-center gap-2">
                                                     <Link
                                                         href={route(
@@ -68,7 +72,11 @@ const Index = ({ ...props }) => {
                                                         Edit
                                                     </Link>
                                                     <button
-                                                        onClick={() => handleDelete(user.id)}
+                                                        onClick={() =>
+                                                            handleDelete(
+                                                                user.id
+                                                            )
+                                                        }
                                                         className="btn btn-sm btn-error"
                                                     >
                                                         Delete

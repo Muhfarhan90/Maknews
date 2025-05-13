@@ -1,5 +1,5 @@
 import React from "react";
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+import AuthenticatedLayout from "@/Pages/Layouts/AuthenticatedLayout";
 import { Head, Link, router } from "@inertiajs/react";
 import SearchBar from "@/Components/SearchBar";
 const Index = ({ ...props }) => {
@@ -70,7 +70,9 @@ const Index = ({ ...props }) => {
                                                               .name
                                                         : "-"}
                                                 </td>
-                                                <td className="line-clamp-2 overflow-hidden">{stripHtml(article.content)}</td>
+                                                <td className="line-clamp-2 overflow-hidden">
+                                                    {stripHtml(article.content)}
+                                                </td>
                                                 <td>
                                                     {article.photo ? (
                                                         <div className="avatar">
