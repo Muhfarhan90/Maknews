@@ -16,30 +16,31 @@ const SearchBar = ({ routeName }) => {
         );
     };
     return (
-        <form className="input" onSubmit={handleSubmit}>
-            <button type="submit">
+        <form
+            className="input rounded-2xl text-black w-56"
+            onSubmit={handleSubmit}
+        >
+            <button type="submit" className="border-r border-gray-300 pr-2">
                 <svg
-                    className="h-[1em] opacity-50"
                     xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
                     viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="w-6 h-6 text-black"
                 >
-                    <g
-                        strokeLinejoin="round"
+                    <path
                         strokeLinecap="round"
-                        strokeWidth="2.5"
-                        fill="none"
-                        stroke="currentColor"
-                    >
-                        <circle cx="11" cy="11" r="8"></circle>
-                        <path d="m21 21-4.3-4.3"></path>
-                    </g>
+                        strokeLinejoin="round"
+                        d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+                    />
                 </svg>
             </button>
 
             <input
                 type="search"
-                className="grow"
-                placeholder="Search"
+                className="grow pl-0 font-body text-sm bg-transparent focus:outline-none focus:ring-0"
+                placeholder="Cari artikel"
                 name="search"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}

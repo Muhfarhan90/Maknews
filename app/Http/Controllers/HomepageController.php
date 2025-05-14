@@ -53,11 +53,14 @@ class HomepageController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($homepage)
     {
-        $article = Article::with('category_article')->find($id);
-        return Inertia::render('Article/Show', [
+        $article = Article::where('slug', $homepage)->firstOrFail();
+        $new_articles = Article::where('id', '!=', $article->id)->orderBy('created_at', 'desc')->with('category_article')->take(4)->get();
+
+        return Inertia::render('Homepage/ShowArticle', [
             'article' => $article,
+            'new_articles' => $new_articles,
         ]);
     }
 
