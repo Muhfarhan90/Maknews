@@ -57,10 +57,11 @@ class HomepageController extends Controller
     {
         $article = Article::where('slug', $homepage)->firstOrFail();
         $new_articles = Article::where('id', '!=', $article->id)->orderBy('created_at', 'desc')->with('category_article')->take(4)->get();
-
+        $author = $article->user;
         return Inertia::render('Homepage/ShowArticle', [
             'article' => $article,
             'new_articles' => $new_articles,
+            'author' => $author
         ]);
     }
 

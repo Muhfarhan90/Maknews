@@ -43,9 +43,11 @@ const Index = ({ ...props }) => {
                                 <thead>
                                     <tr>
                                         <th>No</th>
+                                        <th>Photo</th>
                                         <th>Name</th>
                                         <th>Email</th>
                                         <th>Role</th>
+                                        <th>Deskripsi</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -54,6 +56,20 @@ const Index = ({ ...props }) => {
                                         props.users.map((user, index) => (
                                             <tr key={user.id}>
                                                 <th>{index + 1} </th>
+                                                <td>
+                                                    {user.photo ? (
+                                                        <div className="avatar">
+                                                            <div className="mask mask-squircle h-12 w-12">
+                                                                <img
+                                                                    src={`/storage/${user.photo}`}
+                                                                    alt=""
+                                                                />
+                                                            </div>
+                                                        </div>
+                                                    ) : (
+                                                        "No Image"
+                                                    )}
+                                                </td>{" "}
                                                 <td>{user.name}</td>
                                                 <td>{user.email}</td>
                                                 <td>
@@ -61,6 +77,7 @@ const Index = ({ ...props }) => {
                                                         ? user.role.name
                                                         : "-"}
                                                 </td>
+                                                <td>{user.description}</td>
                                                 <td className="flex items-center gap-2">
                                                     <Link
                                                         href={route(

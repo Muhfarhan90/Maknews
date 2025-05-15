@@ -40,7 +40,7 @@ const SearchBar = ({ routeName }) => {
             <input
                 type="search"
                 className="grow pl-0 font-body text-sm bg-transparent focus:outline-none focus:ring-0"
-                placeholder="Cari artikel"
+                placeholder="Pencarian pintar..."
                 name="search"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}

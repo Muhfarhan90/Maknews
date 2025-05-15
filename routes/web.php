@@ -10,6 +10,9 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
+Route::get('/', function () {
+    return redirect('/homepage');
+});
 Route::resource('/homepage', HomepageController::class);
 
 Route::resource('users', UserController::class);

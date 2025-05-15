@@ -9,6 +9,8 @@ const Create = ({ roles }) => {
         role_id: "",
         password: "",
         password_confirmation: "",
+        photo: "",
+        description: "",
     });
 
     const handleSubmit = (e) => {
@@ -91,6 +93,51 @@ const Create = ({ roles }) => {
                                     label="Pilih Role"
                                 />
                             )}
+                            <fieldset className="fieldset">
+                                <legend className="fieldset-legend">
+                                    Pick a file
+                                </legend>
+                                <input
+                                    type="file"
+                                    className="file-input"
+                                    name="photo"
+                                    accept="image/*"
+                                    onChange={(e) =>
+                                        setData("photo", e.target.files[0])
+                                    }
+                                />
+                                <label className="label">Max size 2MB</label>
+                                {errors.photo && (
+                                    <p className="text-red-500 text-sm">
+                                        {errors.photo}
+                                    </p>
+                                )}
+                            </fieldset>
+                            <fieldset className="fieldset">
+                                <legend className="fieldset-legend">
+                                    Deskripsi
+                                </legend>
+                                <input
+                                    type="text"
+                                    className="input"
+                                    placeholder="Deskripsi"
+                                    name="description"
+                                    value={data.description}
+                                    onChange={(e) =>
+                                        setData("description", e.target.value)
+                                    }
+                                    required
+                                />
+                                {errors.description && (
+                                    <p className="text-red-500 text-sm">
+                                        {errors.description}
+                                    </p>
+                                )}
+                                <p className="label">
+                                    You can edit page title later on from
+                                    settings
+                                </p>
+                            </fieldset>
                             <fieldset className="fieldset">
                                 <legend className="fieldset-legend">
                                     Password

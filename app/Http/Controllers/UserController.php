@@ -46,12 +46,21 @@ class UserController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
             'role_id' => 'required',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'description' => 'required|string|max:255',
         ]);
+
+        if ($request->hasFile('photo')) {
+            $imagePath = $request->file('photo')->store('users', 'public');
+        }
+
         User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
             'role_id' => $request->role_id,
+            'photo' => $imagePath ?? null,
+            'description' => $request->description,
         ]);
         return redirect()->route('users.index')->with('success', 'User created successfully.');
     }
