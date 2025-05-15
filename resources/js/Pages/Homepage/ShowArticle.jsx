@@ -21,7 +21,7 @@ const ShowArticle = ({ article, new_articles, author }) => {
                             <AuthorCard author={author} />
                         </div>
                     </div>
-                    <div className="flex flex-col gap-8">
+                    <div className="flex flex-col">
                         <HeadingSection heading="Artikel Terbaru" />
                         <NewArticles articles={new_articles} />
                     </div>

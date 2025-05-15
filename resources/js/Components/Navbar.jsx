@@ -54,7 +54,7 @@ const Navbar = ({ categories }) => {
                     );
                 })}
             </ul>
-            <div className="flex">
+            <div className="flex gap-4">
                 <SearchBar routeName={"homepage.index"} />
                 <ButtonAction name="Login" />
             </div>

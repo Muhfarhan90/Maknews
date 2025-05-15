@@ -16,6 +16,7 @@ class HomepageController extends Controller
     {
 
         $query = Article::query();
+        $new_articles = Article::with('category_article')->orderBy('created_at', 'desc')->take(4)->get();
 
         if ($request->has('search')) {
             $query->where('title', 'like', "%{$request->search}%");
@@ -31,6 +32,7 @@ class HomepageController extends Controller
         return Inertia::render('Homepage/Homepage', [
             'articles' => $articles,
             'categories' => $categories,
+            'new_articles' => $new_articles,
         ]);
     }
 
