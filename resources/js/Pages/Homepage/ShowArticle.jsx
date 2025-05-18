@@ -1,14 +1,18 @@
 import React from "react";
 import HomepageLayout from "../Layouts/HomepageLayout";
 import DetailArticle from "@/Components/DetailArticle";
-import { Head } from "@inertiajs/react";
+import { Head, usePage } from "@inertiajs/react";
 import NewArticles from "@/Components/NewArticles";
 import HeadingSection from "@/Components/HeadingSection";
 import AuthorCard from "@/Components/AuthorCard";
+import CommentSection from "@/Components/CommentSection";
+import { comment } from "postcss";
 
-const ShowArticle = ({ article, new_articles, author }) => {
+const ShowArticle = ({ article, new_articles, author, comments }) => {
     console.log(article);
+    console.log(comments);
     console.log(new_articles);
+    const { auth } = usePage().props;
     return (
         <div>
             <HomepageLayout>
@@ -19,6 +23,13 @@ const ShowArticle = ({ article, new_articles, author }) => {
                         <div>
                             <HeadingSection heading="Penulis" />
                             <AuthorCard author={author} />
+                        </div>
+                        <div>
+                            <CommentSection
+                                comments={comments}
+                                currentUser={auth.user}
+                                articleId={article.id}
+                            />
                         </div>
                     </div>
                     <div className="flex flex-col">

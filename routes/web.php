@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CategoryArticleController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
@@ -14,6 +15,7 @@ Route::get('/', function () {
     return redirect('/homepage');
 });
 Route::resource('/homepage', HomepageController::class);
+Route::resource('/comment', CommentController::class);
 
 Route::resource('users', UserController::class);
 Route::resource('roles', RoleController::class);

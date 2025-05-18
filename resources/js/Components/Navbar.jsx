@@ -7,6 +7,9 @@ import ButtonAction from "./ButtonAction";
 const Navbar = ({ categories }) => {
     // Getting URL
     const { url } = usePage();
+    console.log(url);
+    const { auth } = usePage().props;
+    console.log(auth);
     return (
         <div className="flex justify-between items-center py-4 px-14 shadow-md bg-neutral-dark text-neutral-light">
             <div className="flex items-center">
@@ -56,7 +59,36 @@ const Navbar = ({ categories }) => {
             </ul>
             <div className="flex gap-4">
                 <SearchBar routeName={"homepage.index"} />
-                <ButtonAction name="Login" />
+                {auth?.user ? (
+                    <div className="dropdown dropdown-end">
+                        <div
+                            tabIndex={0}
+                            role="button"
+                            className="btn bg-primary rounded-field"
+                        >
+                            {auth.user.name}
+                        </div>
+                        <ul
+                            tabIndex={0}
+                            className="menu dropdown-content bg-secondary rounded-box z-1 mt-4 w-52 p-2 shadow-sm"
+                        >
+                            <li>
+                                <a>Profile</a>
+                            </li>
+                            <li>
+                                <Link href={route("logout")} method="post">
+                                    Logout
+                                </Link>
+                            </li>
+                        </ul>
+                    </div>
+                ) : (
+                    <div>
+                        <Link href={route("login")}>
+                            <ButtonAction name="Login" type="button" />
+                        </Link>
+                    </div>
+                )}
             </div>
         </div>
     );
