@@ -6,7 +6,7 @@ const ArticleCard = ({ article, direction = "vertical" }) => {
         <Link
             href={`/homepage/${article.slug}`}
             className={`flex  ${(direction ===
-                "vertical" ? "flex-col" : "flex-row")} bg-white border-2 border-gray-200 rounded-2xl shadow-sm p-4 hover:border-primary transition-all h-full`}
+                "vertical" ? "flex-col" : "flex-row")} bg-white border-2 border-gray-200 rounded-2xl shadow-sm p-3 hover:border-primary transition-all h-full min-w-[250px]`}
         >
             <div className="relative rounded-xl overflow-hidden h-48">
                 <img

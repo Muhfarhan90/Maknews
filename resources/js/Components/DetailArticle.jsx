@@ -7,15 +7,15 @@ const DetailArticle = ({ article, new_articles }) => {
         return div.textContent || div.innerText || "";
     }
     return (
-        <div className="w-[900px]">
+        <div className="w-full max-w-4xl">
             <h1 className="text-2xl font-bold font-heading text-neutral-dark">
                 {article.title}
             </h1>
-            <div className="w-[900px] h-[500px] overflow-hidden rounded-xl my-4">
+            <div className="w-full max-w-4xl aspect-video overflow-hidden rounded-xl my-4">
                 <img
                     src={`/storage/${article.photo}`}
                     alt=""
-                    className="object-cover w-full h-full"
+                    className="object-cover w-full h-auto"
                 />
             </div>
             <div

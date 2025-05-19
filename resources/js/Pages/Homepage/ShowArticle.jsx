@@ -17,24 +17,28 @@ const ShowArticle = ({ article, new_articles, author, comments }) => {
         <div>
             <HomepageLayout>
                 <Head title="Detail Article" />
-                <div className="flex gap-8">
-                    <div className="flex flex-col gap-8">
-                        <DetailArticle article={article} />
-                        <div>
-                            <HeadingSection heading="Penulis" />
-                            <AuthorCard author={author} />
-                        </div>
-                        <div>
-                            <CommentSection
-                                comments={comments}
-                                currentUser={auth.user}
-                                articleId={article.id}
-                            />
+                <div className="grid grid-cols-12 gap-8">
+                    <div className="col-span-12 md:col-span-8">
+                        <div className="flex flex-col gap-8">
+                            <DetailArticle article={article} />
+                            <div>
+                                <HeadingSection heading="Penulis" />
+                                <AuthorCard author={author} />
+                            </div>
+                            <div>
+                                <CommentSection
+                                    comments={comments}
+                                    currentUser={auth.user}
+                                    articleId={article.id}
+                                />
+                            </div>
                         </div>
                     </div>
-                    <div className="flex flex-col">
-                        <HeadingSection heading="Artikel Terbaru" />
-                        <NewArticles articles={new_articles} />
+                    <div className="col-span-12 md:col-span-4  ">
+                        <div className="flex flex-col">
+                            <HeadingSection heading="Artikel Terbaru" />
+                            <NewArticles articles={new_articles} direction="vertical" />
+                        </div>
                     </div>
                 </div>
             </HomepageLayout>
