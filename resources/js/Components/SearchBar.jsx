@@ -17,7 +17,7 @@ const SearchBar = ({ routeName }) => {
     };
     return (
         <form
-            className="input rounded-2xl text-black w-56"
+            className="input rounded-lg text-black w-56"
             onSubmit={handleSubmit}
         >
             <button type="submit" className="border-r border-gray-300 pr-2">

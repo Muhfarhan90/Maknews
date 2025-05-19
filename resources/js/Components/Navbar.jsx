@@ -11,7 +11,7 @@ const Navbar = ({ categories }) => {
     const { auth } = usePage().props;
     console.log(auth);
     return (
-        <div className="flex justify-between items-center py-4 px-14 shadow-md bg-neutral-dark text-neutral-light">
+        <div className="flex justify-between items-center py-4 px-8 md:px-14 shadow-md bg-neutral-dark text-neutral-light">
             <div className="flex items-center">
                 {/* Logo */}
                 <Link href="/homepage">
@@ -38,7 +38,7 @@ const Navbar = ({ categories }) => {
                     Beranda
                 </Link>
                 {categories?.map((category, index) => {
-                    const categoryUrl = route("homepage.index", {
+                    const categoryUrl = route("homepage.articles", {
                         category: category.name,
                     });
                     const isActive = url.includes(category.name);
@@ -58,7 +58,7 @@ const Navbar = ({ categories }) => {
                 })}
             </ul>
             <div className="flex gap-4">
-                <SearchBar routeName={"homepage.index"} />
+                <SearchBar routeName={"homepage.articles"} />
                 {auth?.user ? (
                     <div className="dropdown dropdown-end">
                         <div

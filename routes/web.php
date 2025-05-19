@@ -14,6 +14,7 @@ use Inertia\Inertia;
 Route::get('/', function () {
     return redirect('/homepage');
 });
+Route::get('/homepage/articles', [HomepageController::class, 'listAllArticles'])->name('homepage.articles');
 Route::resource('/homepage', HomepageController::class);
 Route::resource('/comment', CommentController::class);
 

@@ -14,11 +14,10 @@ class HomepageController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
-    {
 
+    public function listAllArticles(Request $request)
+    {
         $query = Article::query();
-        $new_articles = Article::with('category_article')->orderBy('created_at', 'desc')->take(4)->get();
 
         if ($request->has('search')) {
             $query->where('title', 'like', "%{$request->search}%");
@@ -29,7 +28,19 @@ class HomepageController extends Controller
             });
         }
 
-        $articles = $query->with('category_article')->get();
+        $articles = $query->with('category_article')->paginate(8)->withQueryString();
+        $categories = CategoryArticle::all();
+        return Inertia::render('Homepage/ListArticle', [
+            'articles' => $articles,
+            'categories' => $categories,
+        ]);
+    }
+    public function index(Request $request)
+    {
+
+        $new_articles = Article::with('category_article')->orderBy('created_at', 'desc')->take(4)->get();
+
+        $articles = Article::with('category_article')->paginate(8);
         $categories = CategoryArticle::all();
         return Inertia::render('Homepage/Homepage', [
             'articles' => $articles,
