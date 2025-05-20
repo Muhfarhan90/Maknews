@@ -5,7 +5,7 @@ import HomepageLayout from "@/Pages/Layouts/HomepageLayout";
 import HeadingSection from "@/Components/HeadingSection";
 import ButtonAction from "@/Components/ButtonAction";
 import NewArticles from "@/Components/NewArticles";
-import Banner from "@/Components/Banner";
+import Banner from "@/Components/BannerHomepage";
 const Homepage = ({ articles, new_articles }) => {
     return (
         <div>

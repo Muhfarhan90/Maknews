@@ -8,7 +8,7 @@ const HomepageLayout = ({ children }) => {
     return (
         <div className="bg-neutral-light">
             <Navbar categories={categories} />
-            <div className="md:p-14 p-8">{children}</div>
+            <div className="md:px-14 py-8 px-8">{children}</div>
             <Footer />
         </div>
     );

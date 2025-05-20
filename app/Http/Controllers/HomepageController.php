@@ -22,10 +22,12 @@ class HomepageController extends Controller
         if ($request->has('search')) {
             $query->where('title', 'like', "%{$request->search}%");
         }
+        $selectedCategory = null;
         if ($request->has('category')) {
             $query->whereHas('category_article', function ($query) use ($request) {
                 $query->where('name', $request->category);
             });
+            $selectedCategory = CategoryArticle::where('name', $request->category)->first();
         }
 
         $articles = $query->with('category_article')->paginate(8)->withQueryString();
@@ -33,6 +35,7 @@ class HomepageController extends Controller
         return Inertia::render('Homepage/ListArticle', [
             'articles' => $articles,
             'categories' => $categories,
+            'selectedCategory' => $selectedCategory,
         ]);
     }
     public function index(Request $request)

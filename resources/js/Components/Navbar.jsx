@@ -46,7 +46,7 @@ const Navbar = ({ categories }) => {
                         <Link
                             href={categoryUrl}
                             key={index}
-                            className={`text-base capitalize font-body transition-all ${
+                            className={`text-base capitalize font-heading transition-all ${
                                 isActive
                                     ? "text-primary font-bold underline underline-offset-8"
                                     : "hover:text-primary hover:underline hover:underline-offset-8 "
