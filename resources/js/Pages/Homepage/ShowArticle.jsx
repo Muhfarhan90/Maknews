@@ -8,7 +8,7 @@ import AuthorCard from "@/Components/AuthorCard";
 import CommentSection from "@/Components/CommentSection";
 import { comment } from "postcss";
 
-const ShowArticle = ({ article, new_articles, author, comments }) => {
+const ShowArticle = ({ article, new_articles, author, comments, isLiked, isBookmarked, totalLikes }) => {
     console.log(article);
     console.log(comments);
     console.log(new_articles);
@@ -20,7 +20,7 @@ const ShowArticle = ({ article, new_articles, author, comments }) => {
                 <div className="grid grid-cols-12 gap-8">
                     <div className="col-span-12 md:col-span-8">
                         <div className="flex flex-col gap-8">
-                            <DetailArticle article={article} />
+                            <DetailArticle key={article.id} article={article} totalLikes={totalLikes} isLiked={isLiked} isBookmarked={isBookmarked} />
                             <div>
                                 <HeadingSection heading="Penulis" />
                                 <AuthorCard author={author} />

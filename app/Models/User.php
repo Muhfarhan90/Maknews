@@ -54,7 +54,18 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class, 'role_id');
     }
 
-    public function article(){
+    public function article()
+    {
         return $this->hasMany(Article::class);
+    }
+
+    public function likedArticles()
+    {
+        return $this->belongsToMany(Article::class, 'likes')->withTimestamps();
+    }
+
+    public function bookmarkedArticles()
+    {
+        return $this->belongsToMany(Article::class, 'bookmarks')->withTimestamps();
     }
 }

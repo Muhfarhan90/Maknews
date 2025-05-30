@@ -15,14 +15,8 @@ Route::get('/', function () {
     return redirect('/homepage');
 });
 Route::get('/homepage/articles', [HomepageController::class, 'listAllArticles'])->name('homepage.articles');
-Route::resource('/homepage', HomepageController::class);
-Route::resource('/comment', CommentController::class);
-
-Route::resource('users', UserController::class);
-Route::resource('roles', RoleController::class);
-Route::resource('category_articles', CategoryArticleController::class);
-Route::resource('articles', ArticleController::class);
-
+Route::post('homepage/articles/{article}/like', [HomepageController::class, 'toggleLike'])->name('article.like')->middleware('auth');
+Route::post('homepage/article/{article}/bookmark', [HomepageController::class, 'toggleBookmark'])->name('article.bookmark')->middleware('auth');
 Route::get('/welcome', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
@@ -31,6 +25,14 @@ Route::get('/welcome', function () {
         'phpVersion' => PHP_VERSION,
     ]);
 });
+Route::resource('/homepage', HomepageController::class);
+Route::resource('/comment', CommentController::class);
+
+Route::resource('users', UserController::class);
+Route::resource('roles', RoleController::class);
+Route::resource('category_articles', CategoryArticleController::class);
+Route::resource('articles', ArticleController::class);
+
 Route::get('/guests', function () {
     return Inertia::render('Guest');
 })->name('guest');

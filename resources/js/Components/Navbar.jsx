@@ -25,7 +25,7 @@ const Navbar = ({ categories }) => {
                 </Link>
             </div>
             {/* Category */}
-            <ul className="hidden md:flex gap-4">
+            <ul className="hidden md:flex flex-wrap gap-4">
                 {/* Link Beranda */}
                 <Link
                     href="/homepage"
@@ -64,7 +64,7 @@ const Navbar = ({ categories }) => {
                         <div
                             tabIndex={0}
                             role="button"
-                            className="btn bg-primary rounded-field"
+                            className="btn bg-primary hover:bg-primary/80 text-neutral-dark rounded-field"
                         >
                             {auth.user.name}
                         </div>

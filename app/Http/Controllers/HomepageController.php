@@ -52,6 +52,37 @@ class HomepageController extends Controller
         ]);
     }
 
+
+    public function toggleLike(Article $article)
+    {
+        $user = auth()->user();
+
+        if ($article->likedByUsers()->where('user_id', $user->id)->exists()) {
+            // Jika sudah like → un-like
+            $article->likedByUsers()->detach($user->id);
+        } else {
+            // Belum like → like
+            $article->likedByUsers()->attach($user->id);
+        }
+
+        return redirect()->back();
+    }
+
+    public function toggleBookmark(Article $article)
+    {
+        $user = auth()->user();
+
+        if ($article->bookmarks()->where('user_id', $user->id)->exists()) {
+            // Jika sudah bookmark → un-bookmark
+            $article->bookmarks()->detach($user->id);
+        } else {
+            // Belum bookmark → bookmark
+            $article->bookmarks()->attach($user->id);
+        }
+
+        return redirect()->back();
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -77,14 +108,19 @@ class HomepageController extends Controller
         $comments = Comment::where('article_id', $article->id)->with('user')->get();
         $new_articles = Article::where('id', '!=', $article->id)->orderBy('created_at', 'desc')->with('category_article')->take(4)->get();
         $author = $article->user;
+        $user = Auth::user();
         return Inertia::render('Homepage/ShowArticle', [
             'article' => $article,
             'new_articles' => $new_articles,
             'author' => $author,
             'comments' => $comments,
+            'totalLikes' => $article->likedByUsers()->count(),
+            'isLiked' => $user ? $article->likedByUsers()->where('user_id', $user->id)->exists() : false,
+            'isBookmarked' => $user ? $article->bookmarks()->where('user_id', $user->id)->exists() : false,
             // 'auth' => Auth::user(),
         ]);
     }
+
 
     /**
      * Show the form for editing the specified resource.
