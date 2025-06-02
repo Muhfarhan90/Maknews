@@ -13,7 +13,7 @@ use Inertia\Inertia;
 
 Route::get('/', function () {
     return redirect('/homepage');
-});
+})->name('homepage');
 Route::get('/homepage/articles', [HomepageController::class, 'listAllArticles'])->name('homepage.articles');
 Route::post('homepage/articles/{article}/like', [HomepageController::class, 'toggleLike'])->name('article.like')->middleware('auth');
 Route::post('homepage/article/{article}/bookmark', [HomepageController::class, 'toggleBookmark'])->name('article.bookmark')->middleware('auth');
@@ -25,6 +25,8 @@ Route::get('/welcome', function () {
         'phpVersion' => PHP_VERSION,
     ]);
 });
+Route::get('/homepage/liked-articles', [HomepageController::class, 'likedArticles'])->name('articles.liked');
+Route::get('/homepage/bookmarked-articles', [HomepageController::class, 'bookmarkedArticles'])->name('articles.bookmarked');
 Route::resource('/homepage', HomepageController::class);
 Route::resource('/comment', CommentController::class);
 

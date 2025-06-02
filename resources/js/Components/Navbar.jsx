@@ -14,7 +14,7 @@ const Navbar = ({ categories }) => {
         <div className="flex justify-between items-center py-4 px-8 md:px-14 shadow-md bg-neutral-dark text-neutral-light">
             <div className="flex items-center">
                 {/* Logo */}
-                <Link href="/homepage">
+                <Link href={route("homepage")}>
                     <img
                         src={logo}
                         alt=""
@@ -24,11 +24,11 @@ const Navbar = ({ categories }) => {
                     />
                 </Link>
             </div>
-            {/* Category */}
+            {/* Menu Link */}
             <ul className="hidden md:flex flex-wrap gap-4">
                 {/* Link Beranda */}
                 <Link
-                    href="/homepage"
+                    href={route("homepage")}
                     className={`text-base capitalize font-body transition-all ${
                         url === "/homepage"
                             ? "text-primary font-bold underline underline-offset-8"
@@ -37,25 +37,89 @@ const Navbar = ({ categories }) => {
                 >
                     Beranda
                 </Link>
-                {categories?.map((category, index) => {
-                    const categoryUrl = route("homepage.articles", {
-                        category: category.name,
-                    });
-                    const isActive = url.includes(category.name);
-                    return (
+                <Link
+                    href={route("homepage.articles")}
+                    className={`text-base capitalize font-body transition-all ${
+                        url === "/homepage/articles"
+                            ? "text-primary font-bold underline underline-offset-8"
+                            : "hover:text-primary hover:underline hover:underline-offset-8"
+                    }`}
+                >
+                    Artikel
+                </Link>
+                {auth?.user && (
+                    <div className="flex gap-4">
                         <Link
-                            href={categoryUrl}
-                            key={index}
-                            className={`text-base capitalize font-heading transition-all ${
-                                isActive
+                            href={route("articles.bookmarked")}
+                            className={`text-base capitalize font-body transition-all ${
+                                url === "/homepage/bookmarked-articles"
                                     ? "text-primary font-bold underline underline-offset-8"
-                                    : "hover:text-primary hover:underline hover:underline-offset-8 "
+                                    : "hover:text-primary hover:underline hover:underline-offset-8"
                             }`}
                         >
-                            {category.name}
+                            Bookmarks
                         </Link>
-                    );
-                })}
+                        <Link
+                            href={route("articles.liked")}
+                            className={`text-base capitalize font-body transition-all ${
+                                url === "/homepage/liked-articles"
+                                    ? "text-primary font-bold underline underline-offset-8"
+                                    : "hover:text-primary hover:underline hover:underline-offset-8"
+                            }`}
+                        >
+                            Liked
+                        </Link>
+                    </div>
+                )}
+                <div className="dropdown dropdown-down">
+                    <div
+                        tabIndex={0}
+                        role="button"
+                        className="flex gap-2 items-center text-base capitalize font-body transition-all hover:text-primary hover:underline hover:underline-offset-8"
+                    >
+                        Kategori
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="1.5"
+                            stroke="currentColor"
+                            class="size-5"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="m19.5 8.25-7.5 7.5-7.5-7.5"
+                            />
+                        </svg>
+                    </div>
+                    <ul
+                        tabIndex={0}
+                        className="menu dropdown-content bg-secondary rounded-box z-1 w-52 p-2 shadow-sm"
+                    >
+                        {categories?.map((category, index) => {
+                            const categoryUrl = route("homepage.articles", {
+                                category: category.name,
+                            });
+                            const isActive = url.includes(category.name);
+                            return (
+                                <li>
+                                    <Link
+                                        href={categoryUrl}
+                                        key={index}
+                                        className={`text-base capitalize font-heading transition-all ${
+                                            isActive
+                                                ? "text-primary font-bold underline underline-offset-8"
+                                                : "hover:text-primary hover:underline hover:underline-offset-8 "
+                                        }`}
+                                    >
+                                        {category.name}
+                                    </Link>
+                                </li>
+                            );
+                        })}
+                    </ul>
+                </div>
             </ul>
             <div className="flex gap-4">
                 <SearchBar routeName={"homepage.articles"} />
@@ -73,7 +137,9 @@ const Navbar = ({ categories }) => {
                             className="menu dropdown-content bg-secondary rounded-box z-1 mt-4 w-52 p-2 shadow-sm"
                         >
                             <li>
-                                <a>Profile</a>
+                                <Link href={route("profile.edit")}>
+                                    Profile
+                                </Link>
                             </li>
                             <li>
                                 <Link href={route("logout")} method="post">

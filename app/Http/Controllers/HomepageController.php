@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use App\Models\CategoryArticle;
 use App\Models\Comment;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -83,6 +84,24 @@ class HomepageController extends Controller
         return redirect()->back();
     }
 
+    public function bookmarkedArticles()
+    {
+        $user = Auth::user();
+        $bookmarkedArticles = $user->bookmarkedArticles()->with('category_article')->paginate(8);
+
+        return Inertia::render('Homepage/BookmarkedArticles', [
+            'bookmarkedArticles' => $bookmarkedArticles,
+        ]);
+    }
+
+    public function likedArticles()
+    {
+        $user = User::find(Auth::id()); // paksa jadi instance App\Models\User
+        $likedArticles = $user->likedArticles()->with('category_article')->paginate(8);
+        return Inertia::render('Homepage/LikedArticles', [
+            'likedArticles' => $likedArticles,
+        ]);
+    }
     /**
      * Show the form for creating a new resource.
      */
